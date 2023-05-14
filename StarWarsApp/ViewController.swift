@@ -8,11 +8,13 @@
 import UIKit
 
 class MainVC: UIViewController {
-
+    
     //MARK: properties
     var arrPeople: [SinglePeople] = []
     var model: PeopleViewModel?
     var totalPeople = Int()
+    var fav: SinglePeople?
+    var isFromSearch: Bool = false
     
     //MARK: outlets
     @IBOutlet weak var tblPeople: UITableView!
@@ -23,6 +25,7 @@ class MainVC: UIViewController {
         super.viewDidLoad()
         setupTableView()
         configureDataModel()
+        setupSearchBar()
     }
     
     func setupTableView() {
@@ -60,10 +63,19 @@ class MainVC: UIViewController {
             }
             
             self.arrPeople = sortedArr
+            self.checkIfFav()
             self.tblPeople.reloadData()
             self.loader.stopAnimating()
             self.loader.isHidden = true
         })
+    }
+    
+    func checkIfFav() {
+        if let fav {
+            if let index = arrPeople.firstIndex(where: { $0.name == fav.name && $0.height == fav.height }) {
+                arrPeople[index].isFavorite = true
+            }
+        }
     }
 }
 
@@ -95,6 +107,7 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
             arrPeople[index].isFavorite = false
         }
         arrPeople[indexPath.row].isFavorite = true
+        fav = arrPeople[indexPath.row]
         tableView.reloadData()
     }
     
@@ -103,11 +116,13 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        if indexPath.row >= arrPeople.count - 2 && !model.isLoading && indexPath.row < model.totalPeople {
+        if indexPath.row >= arrPeople.count - 2 && !model.isLoading && indexPath.row < model.totalPeople && !isFromSearch {
             if !model.isReachedMax {
                 loader.isHidden = false
                 loader.startAnimating()
                 model.getData()
+            } else {
+                model.sortArrByHeight()
             }
         } else if model.isReachedMax {
             model.sortArrByHeight()
@@ -117,8 +132,34 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
 
 extension MainVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if !searchText.isEmpty {
-            
+        if let model {
+            model.reset()
         }
+        isFromSearch = true
+        loader.isHidden = false
+        loader.startAnimating()
+        NetworkManager.shared.searchPeople(searchText: searchText) { [weak self] peopleData in
+            guard let peopleData, let self else {
+                return
+            }
+            
+            self.arrPeople.removeAll()
+            self.arrPeople = peopleData.results
+            self.checkIfFav()
+            self.tblPeople.reloadData()
+            self.loader.stopAnimating()
+            self.loader.isHidden = true
+            if searchText.isEmpty {
+                self.isFromSearch = false
+            }
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.searchTextField.resignFirstResponder()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.searchTextField.resignFirstResponder()
     }
 }

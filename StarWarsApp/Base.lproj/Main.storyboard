@@ -54,7 +54,7 @@
                     </view>
                     <connections>
                         <outlet property="loader" destination="94u-lc-hel" id="sgl-BS-ROG"/>
-                        <outlet property="searchBar" destination="6w3-rA-0EF" id="uxK-fw-8NP"/>
+                        <outlet property="searchBar" destination="6w3-rA-0EF" id="f8y-DP-UO8"/>
                         <outlet property="tblPeople" destination="P9r-iV-iSR" id="Pxk-Te-uPy"/>
                     </connections>
                 </viewController>

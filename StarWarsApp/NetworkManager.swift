@@ -13,10 +13,10 @@ class NetworkManager {
     let baseUrl = "https://swapi.dev/api/"
     
     func getPeople(pageNum: Int, completion: @escaping (PeopleModelData?) -> ()) {
-        let peopleApi = baseUrl + "people/"
+        let peopleEndPoint = baseUrl + "people/"
         let parameters = ["page": pageNum] as [String : Any]
         
-        guard let url: URL = URL(string: peopleApi) else {
+        guard let url: URL = URL(string: peopleEndPoint) else {
             completion(nil)
             print("fail to load URL")
             return
@@ -33,6 +33,24 @@ class NetworkManager {
         }
     }
     
-    
-    
+    func searchPeople(searchText: String, completion: @escaping (PeopleModelData?) -> ()) {
+        let peopleEndPoint = baseUrl + "people/"
+        let parameters = ["search": searchText] as [String : Any]
+        
+        guard let url: URL = URL(string: peopleEndPoint) else {
+            completion(nil)
+            print("fail to load URL")
+            return
+        }
+        
+        AF.request(url, parameters: parameters, encoding: URLEncoding.queryString).responseDecodable(of: PeopleModelData.self) { (response) in
+            switch response.result {
+            case .success(let result):
+                completion(result)
+            case .failure(let error):
+                print("some indication of failure when trying to decode data error: \(error)")
+                completion(nil)
+            }
+        }
+    }
 }

@@ -27,6 +27,7 @@ class PeopleCell: UITableViewCell {
         peopleNameLbl.text = ""
         heightLbl.text = ""
         favoriteImage.isHidden = true
+        topSeperatorView.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

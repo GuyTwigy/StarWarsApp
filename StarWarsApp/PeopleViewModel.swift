@@ -49,7 +49,7 @@ class PeopleViewModel {
                     self.totalPeople = total
                 }
                 self.peopleArr.append(contentsOf: peopledata.results)
-                if self.peopleArrCount == self.totalPeople {
+                if self.peopleArrCount >= self.totalPeople {
                     self.isReachedMax = true
                 }
                 self.pageNum += 1
@@ -65,5 +65,11 @@ class PeopleViewModel {
             peopleArr.sort( by: { Int($1.height ?? "") ?? 0 > Int($0.height ?? "") ?? 0 })
             updateSortedArrHandler?(peopleArr)
         }
+    }
+    
+    func reset() {
+        isLoading = false
+        pageNum = 1
+        peopleArr.removeAll()
     }
 }
