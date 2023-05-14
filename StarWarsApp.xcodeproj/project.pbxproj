@@ -17,6 +17,9 @@
 		9D52EC282A11522B004106B2 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D52EC272A11522B004106B2 /* NetworkManager.swift */; };
 		9D52EC2A2A115262004106B2 /* PeopleModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D52EC292A115262004106B2 /* PeopleModelData.swift */; };
 		9D52EC2C2A115288004106B2 /* PeopleViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D52EC2B2A115288004106B2 /* PeopleViewModel.swift */; };
+		9D9E20FD2A1160F800E2E446 /* PeopleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E20FB2A1160F800E2E446 /* PeopleCell.swift */; };
+		9D9E20FE2A1160F800E2E446 /* PeopleCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D9E20FC2A1160F800E2E446 /* PeopleCell.xib */; };
+		9D9E21002A11654500E2E446 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D9E20FF2A11654500E2E446 /* UIViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +36,9 @@
 		9D52EC272A11522B004106B2 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		9D52EC292A115262004106B2 /* PeopleModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleModelData.swift; sourceTree = "<group>"; };
 		9D52EC2B2A115288004106B2 /* PeopleViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleViewModel.swift; sourceTree = "<group>"; };
+		9D9E20FB2A1160F800E2E446 /* PeopleCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PeopleCell.swift; sourceTree = "<group>"; };
+		9D9E20FC2A1160F800E2E446 /* PeopleCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PeopleCell.xib; sourceTree = "<group>"; };
+		9D9E20FF2A11654500E2E446 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		DC1C6546507A682A49B6E13F /* Pods_StarWarsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_StarWarsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -54,7 +60,6 @@
 				99187C99180BC3D9ED66B68C /* Pods-StarWarsApp.debug.xcconfig */,
 				7CFB9C5FA5287E44E601CEE6 /* Pods-StarWarsApp.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -94,6 +99,9 @@
 				9D52EC272A11522B004106B2 /* NetworkManager.swift */,
 				9D52EC292A115262004106B2 /* PeopleModelData.swift */,
 				9D52EC2B2A115288004106B2 /* PeopleViewModel.swift */,
+				9D9E20FB2A1160F800E2E446 /* PeopleCell.swift */,
+				9D9E20FC2A1160F800E2E446 /* PeopleCell.xib */,
+				9D9E20FF2A11654500E2E446 /* UIViewExtension.swift */,
 				9D52EC1C2A1151EF004106B2 /* Assets.xcassets */,
 				9D52EC1E2A1151EF004106B2 /* LaunchScreen.storyboard */,
 				9D52EC212A1151EF004106B2 /* Info.plist */,
@@ -161,6 +169,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D9E20FE2A1160F800E2E446 /* PeopleCell.xib in Resources */,
 				9D52EC202A1151EF004106B2 /* LaunchScreen.storyboard in Resources */,
 				9D52EC1D2A1151EF004106B2 /* Assets.xcassets in Resources */,
 				9D52EC1B2A1151EF004106B2 /* Main.storyboard in Resources */,
@@ -218,9 +227,11 @@
 			files = (
 				9D52EC282A11522B004106B2 /* NetworkManager.swift in Sources */,
 				9D52EC2C2A115288004106B2 /* PeopleViewModel.swift in Sources */,
+				9D9E20FD2A1160F800E2E446 /* PeopleCell.swift in Sources */,
 				9D52EC2A2A115262004106B2 /* PeopleModelData.swift in Sources */,
 				9D52EC182A1151EF004106B2 /* ViewController.swift in Sources */,
 				9D52EC142A1151EF004106B2 /* AppDelegate.swift in Sources */,
+				9D9E21002A11654500E2E446 /* UIViewExtension.swift in Sources */,
 				9D52EC162A1151EF004106B2 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

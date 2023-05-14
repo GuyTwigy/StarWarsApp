@@ -6,5 +6,4 @@ target 'StarWarsApp' do
   use_frameworks!
 
  pod 'Alamofire'
- pod 'Kingfisher'
 end

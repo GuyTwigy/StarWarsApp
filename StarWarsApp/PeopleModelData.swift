@@ -7,14 +7,15 @@
 
 import Foundation
 
-struct PeopleModelData: Codable {
+struct PeopleModelData: Decodable {
     let count: Int?
     let next: String?
     let previous: String?
     let results: [SinglePeople]
 }
 
-struct SinglePeople: Codable {
+struct SinglePeople: Decodable, Equatable {
     let name: String?
     let height: String?
+    var isFavorite: Bool?
 }

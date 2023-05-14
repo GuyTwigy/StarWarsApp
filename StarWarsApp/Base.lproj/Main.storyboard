@@ -9,29 +9,57 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--MainVC-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="StarWarsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainVC" customModule="StarWarsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6KS-ET-Kz8">
-                                <rect key="frame" x="10" y="69" width="373" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="6w3-rA-0EF">
+                                <rect key="frame" x="10" y="119" width="393" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="qAg-4l-J1r"/>
+                                </connections>
+                            </searchBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Star Wars Actors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJp-VX-Rl4">
+                                <rect key="frame" x="20" y="69" width="353" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="P9r-iV-iSR">
+                                <rect key="frame" x="10" y="195" width="373" height="623"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="94u-lc-hel">
+                                <rect key="frame" x="178" y="420" width="37" height="37"/>
+                            </activityIndicatorView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6KS-ET-Kz8" secondAttribute="trailing" constant="10" id="E2i-uO-6dh"/>
-                            <constraint firstItem="6KS-ET-Kz8" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="cYp-IQ-HE2"/>
-                            <constraint firstItem="6KS-ET-Kz8" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="laf-Lq-8Zv"/>
+                            <constraint firstItem="P9r-iV-iSR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="2WZ-Se-MRo"/>
+                            <constraint firstItem="YJp-VX-Rl4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="7g7-fq-qdx"/>
+                            <constraint firstItem="6w3-rA-0EF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="CVU-7z-ym4"/>
+                            <constraint firstItem="94u-lc-hel" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="DXM-iA-Ngf"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="P9r-iV-iSR" secondAttribute="trailing" constant="10" id="Dpc-CK-xhY"/>
+                            <constraint firstItem="94u-lc-hel" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="K1e-5y-4j6"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YJp-VX-Rl4" secondAttribute="trailing" constant="20" id="SK8-Lb-lbH"/>
+                            <constraint firstItem="6w3-rA-0EF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="10" id="Tpi-Js-RqA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="P9r-iV-iSR" secondAttribute="bottom" id="X8S-U4-ITi"/>
+                            <constraint firstItem="YJp-VX-Rl4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="aDh-nC-T7m"/>
+                            <constraint firstItem="P9r-iV-iSR" firstAttribute="top" secondItem="6w3-rA-0EF" secondAttribute="bottom" constant="20" id="k0g-bH-o6V"/>
+                            <constraint firstItem="6w3-rA-0EF" firstAttribute="top" secondItem="YJp-VX-Rl4" secondAttribute="bottom" constant="20" id="yx7-uL-o5s"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="loader" destination="94u-lc-hel" id="sgl-BS-ROG"/>
+                        <outlet property="searchBar" destination="6w3-rA-0EF" id="uxK-fw-8NP"/>
+                        <outlet property="tblPeople" destination="P9r-iV-iSR" id="Pxk-Te-uPy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
