@@ -18,11 +18,8 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="6w3-rA-0EF">
-                                <rect key="frame" x="10" y="119" width="393" height="56"/>
+                                <rect key="frame" x="20" y="119" width="353" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="BYZ-38-t0r" id="qAg-4l-J1r"/>
-                                </connections>
                             </searchBar>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Star Wars Actors" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YJp-VX-Rl4">
                                 <rect key="frame" x="20" y="69" width="353" height="30"/>
@@ -43,15 +40,15 @@
                         <constraints>
                             <constraint firstItem="P9r-iV-iSR" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="2WZ-Se-MRo"/>
                             <constraint firstItem="YJp-VX-Rl4" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="7g7-fq-qdx"/>
-                            <constraint firstItem="6w3-rA-0EF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="10" id="CVU-7z-ym4"/>
                             <constraint firstItem="94u-lc-hel" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="DXM-iA-Ngf"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="P9r-iV-iSR" secondAttribute="trailing" constant="10" id="Dpc-CK-xhY"/>
+                            <constraint firstItem="6w3-rA-0EF" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="HkC-at-spY"/>
                             <constraint firstItem="94u-lc-hel" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="K1e-5y-4j6"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="YJp-VX-Rl4" secondAttribute="trailing" constant="20" id="SK8-Lb-lbH"/>
-                            <constraint firstItem="6w3-rA-0EF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="10" id="Tpi-Js-RqA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="P9r-iV-iSR" secondAttribute="bottom" id="X8S-U4-ITi"/>
                             <constraint firstItem="YJp-VX-Rl4" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="10" id="aDh-nC-T7m"/>
                             <constraint firstItem="P9r-iV-iSR" firstAttribute="top" secondItem="6w3-rA-0EF" secondAttribute="bottom" constant="20" id="k0g-bH-o6V"/>
+                            <constraint firstItem="6w3-rA-0EF" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.9" id="vqi-X0-sNg"/>
                             <constraint firstItem="6w3-rA-0EF" firstAttribute="top" secondItem="YJp-VX-Rl4" secondAttribute="bottom" constant="20" id="yx7-uL-o5s"/>
                         </constraints>
                     </view>

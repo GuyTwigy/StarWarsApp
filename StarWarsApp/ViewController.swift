@@ -10,33 +10,19 @@ import UIKit
 class MainVC: UIViewController {
 
     //MARK: properties
-    var pageNum: Int = 1
     var arrPeople: [SinglePeople] = []
-    var totalPeople: Int = 0
-    var model: PeopleModelData?
-    var isSorted: Bool = false
-    var favIndex = (String(), String())
-    var isLoading: Bool = false
+    var model: PeopleViewModel?
+    var totalPeople = Int()
     
     //MARK: outlets
     @IBOutlet weak var tblPeople: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var loader: UIActivityIndicatorView!
     
-//    init(model: PeopleModelData? = nil) {
-//        self.model = model
-//        super.init(nibName: "MainVC", bundle: nil)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        getData()
-        loader.isHidden = true
+        configureDataModel()
     }
     
     func setupTableView() {
@@ -47,49 +33,37 @@ class MainVC: UIViewController {
         tblPeople.rowHeight = UITableView.automaticDimension
     }
     
-    
-    
-    
-    func getData() {
-        self.isLoading = true
-        loader.isHidden = false
-        loader.startAnimating()
-        NetworkManager.shared.getPeople(pageNum: pageNum) { [weak self] peopledata in
-            guard let peopledata, let self, let total = peopledata.count else {
-                self?.isLoading = false
-                self?.loader.isHidden = true
-                self?.loader.startAnimating()
-                print("something went wrong")
-                
-                return
-            }
-            
-            DispatchQueue.main.async {
-                if self.pageNum == 1 {
-                    self.totalPeople = total
-                }
-                self.arrPeople.append(contentsOf: peopledata.results)
-                self.tblPeople.reloadData()
-                self.pageNum += 1
-                self.loader.stopAnimating()
-                self.loader.isHidden = true
-                self.isLoading = false
-            }
-        }
+    func setupSearchBar() {
+        searchBar.delegate = self
     }
     
-    func sortArrByHeight() {
-        if !isSorted {
-            isSorted = true
-            arrPeople.sort( by: { Int($1.height ?? "") ?? 0 > Int($0.height ?? "") ?? 0 })
+    func configureDataModel() {
+        loader.isHidden = false
+        loader.startAnimating()
+        model = PeopleViewModel(updateHandler: { [weak self] peopleData in
             DispatchQueue.main.async { [weak self] in
                 guard let self else {
+                    self?.loader.stopAnimating()
+                    self?.loader.isHidden = true
                     return
                 }
                 
+                self.totalPeople = peopleData.count
+                self.arrPeople.append(contentsOf: peopleData)
                 self.tblPeople.reloadData()
+                self.loader.stopAnimating()
+                self.loader.isHidden = true
             }
-        }
+        }, updateSortedArrHandler: { [weak self] sortedArr in
+            guard let self else {
+                return
+            }
+            
+            self.arrPeople = sortedArr
+            self.tblPeople.reloadData()
+            self.loader.stopAnimating()
+            self.loader.isHidden = true
+        })
     }
 }
 
@@ -102,11 +76,16 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: PeopleCell.nibName, for: indexPath) as! PeopleCell
         if let height = arrPeople[indexPath.row].height, let heightInt = Int(height) {
             cell.cellHeightConstraint.constant = CGFloat(heightInt)
+        } else {
+            cell.cellHeightConstraint.constant = 70
         }
         cell.peopleNameLbl.text = arrPeople[indexPath.row].name
         cell.heightLbl.text = arrPeople[indexPath.row].height
         if arrPeople[indexPath.row].isFavorite ?? false {
             cell.favoriteImage.isHidden = false
+        }
+        if indexPath.row == 0 {
+            cell.topSeperatorView.isHidden = false
         }
         return cell
     }
@@ -120,10 +99,26 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row >= arrPeople.count - 2 && !isLoading && indexPath.row < totalPeople {
-            getData()
-        } else if arrPeople.count >= totalPeople {
-            sortArrByHeight()
+        guard let model else {
+            return
+        }
+        
+        if indexPath.row >= arrPeople.count - 2 && !model.isLoading && indexPath.row < model.totalPeople {
+            if !model.isReachedMax {
+                loader.isHidden = false
+                loader.startAnimating()
+                model.getData()
+            }
+        } else if model.isReachedMax {
+            model.sortArrByHeight()
+        }
+    }
+}
+
+extension MainVC: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if !searchText.isEmpty {
+            
         }
     }
 }

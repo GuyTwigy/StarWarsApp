@@ -14,10 +14,9 @@ class PeopleCell: UITableViewCell {
     @IBOutlet weak var peopleNameLbl: UILabel!
     @IBOutlet weak var heightLbl: UILabel!
     @IBOutlet weak var favoriteImage: UIImageView!
-    
     @IBOutlet weak var cellHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var heightViewHeightConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var topSeperatorView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
