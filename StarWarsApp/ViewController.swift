@@ -14,7 +14,6 @@ class MainVC: UIViewController {
     var model: PeopleViewModel?
     var totalPeople = Int()
     var fav: SinglePeople?
-    var isFromSearch: Bool = false
     
     //MARK: outlets
     @IBOutlet weak var tblPeople: UITableView!
@@ -116,11 +115,11 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        if indexPath.row >= arrPeople.count - 2 && !model.isLoading && indexPath.row < model.totalPeople && !isFromSearch {
+        if indexPath.row >= arrPeople.count - 2 && !model.isLoading && indexPath.row < model.totalPeople && !model.isFromSearch {
             if !model.isReachedMax {
                 loader.isHidden = false
                 loader.startAnimating()
-                model.getData()
+                model.getPeopleData()
             } else {
                 model.sortArrByHeight()
             }
@@ -132,27 +131,18 @@ extension MainVC: UITableViewDelegate, UITableViewDataSource {
 
 extension MainVC: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if let model {
-            model.reset()
+        guard let model else {
+            return
         }
-        isFromSearch = true
+        
+        model.getDataFromSearchBar(searchText: searchText)
+        if searchText.isEmpty {
+            model.isFromSearch = false
+        } else {
+            model.isFromSearch = true
+        }
         loader.isHidden = false
         loader.startAnimating()
-        NetworkManager.shared.searchPeople(searchText: searchText) { [weak self] peopleData in
-            guard let peopleData, let self else {
-                return
-            }
-            
-            self.arrPeople.removeAll()
-            self.arrPeople = peopleData.results
-            self.checkIfFav()
-            self.tblPeople.reloadData()
-            self.loader.stopAnimating()
-            self.loader.isHidden = true
-            if searchText.isEmpty {
-                self.isFromSearch = false
-            }
-        }
     }
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {

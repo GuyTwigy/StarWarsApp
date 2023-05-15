@@ -11,11 +11,6 @@ class PeopleViewModel {
     typealias UpdateHandler = ([SinglePeople]) -> ()
     typealias UpdateSortedArrHandler = ([SinglePeople]) -> ()
     
-    enum GroupsType {
-        case allGroups
-        case myGroups
-    }
-    
     private var updateHandler: UpdateHandler?
     private var updateSortedArrHandler: UpdateSortedArrHandler?
     var peopleArr = [SinglePeople]()
@@ -24,6 +19,7 @@ class PeopleViewModel {
     var isLoading: Bool = false
     var isReachedMax: Bool = false
     var isSorted: Bool = false
+    var isFromSearch: Bool = false
     var peopleArrCount: Int {
         return peopleArr.count
     }
@@ -32,13 +28,13 @@ class PeopleViewModel {
     init(updateHandler: UpdateHandler? = nil, updateSortedArrHandler: UpdateSortedArrHandler? = nil) {
         self.updateHandler = updateHandler
         self.updateSortedArrHandler = updateSortedArrHandler
-        getData()
+        getPeopleData()
     }
     
     // MARK: - Services
-    func getData() {
+    func getPeopleData() {
         self.isLoading = true
-        NetworkManager.shared.getPeople(pageNum: pageNum) { [weak self] peopledata in
+        NetworkManager.shared.getPeopleOrSearch(type: .people, pageNum: pageNum, searchText: nil) { [weak self] peopledata in
             guard let peopledata, let self, let total = peopledata.count else {
                 self?.isLoading = false
                 return
@@ -59,6 +55,22 @@ class PeopleViewModel {
         }
     }
     
+    func getDataFromSearchBar(searchText: String) {
+        reset()
+        isFromSearch = true
+        NetworkManager.shared.getPeopleOrSearch(type: .search, pageNum: pageNum, searchText: searchText) { [weak self] peopleData in
+            guard let peopleData, let self else {
+                return
+            }
+            
+            self.peopleArr = peopleData.results
+            if searchText.isEmpty {
+                self.isFromSearch = false
+            }
+            self.updateSortedArrHandler?(self.peopleArr)
+        }
+    }
+    
     func sortArrByHeight() {
         if !isSorted {
             isSorted = true
@@ -72,4 +84,9 @@ class PeopleViewModel {
         pageNum = 1
         peopleArr.removeAll()
     }
+}
+
+enum modelTypeCall {
+    case people
+    case search
 }

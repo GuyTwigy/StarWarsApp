@@ -96,17 +96,49 @@
 				9D52EC152A1151EF004106B2 /* SceneDelegate.swift */,
 				9D52EC172A1151EF004106B2 /* ViewController.swift */,
 				9D52EC192A1151EF004106B2 /* Main.storyboard */,
-				9D52EC272A11522B004106B2 /* NetworkManager.swift */,
-				9D52EC292A115262004106B2 /* PeopleModelData.swift */,
-				9D52EC2B2A115288004106B2 /* PeopleViewModel.swift */,
-				9D9E20FB2A1160F800E2E446 /* PeopleCell.swift */,
-				9D9E20FC2A1160F800E2E446 /* PeopleCell.xib */,
-				9D9E20FF2A11654500E2E446 /* UIViewExtension.swift */,
+				9D9E21042A121B4700E2E446 /* NetworkManager */,
+				9D9E21032A121B2100E2E446 /* People */,
+				9D9E21052A121B5900E2E446 /* Extensions */,
 				9D52EC1C2A1151EF004106B2 /* Assets.xcassets */,
 				9D52EC1E2A1151EF004106B2 /* LaunchScreen.storyboard */,
 				9D52EC212A1151EF004106B2 /* Info.plist */,
 			);
 			path = StarWarsApp;
+			sourceTree = "<group>";
+		};
+		9D9E21032A121B2100E2E446 /* People */ = {
+			isa = PBXGroup;
+			children = (
+				9D52EC292A115262004106B2 /* PeopleModelData.swift */,
+				9D52EC2B2A115288004106B2 /* PeopleViewModel.swift */,
+				9D9E21062A121B6D00E2E446 /* cells */,
+			);
+			path = People;
+			sourceTree = "<group>";
+		};
+		9D9E21042A121B4700E2E446 /* NetworkManager */ = {
+			isa = PBXGroup;
+			children = (
+				9D52EC272A11522B004106B2 /* NetworkManager.swift */,
+			);
+			path = NetworkManager;
+			sourceTree = "<group>";
+		};
+		9D9E21052A121B5900E2E446 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				9D9E20FF2A11654500E2E446 /* UIViewExtension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		9D9E21062A121B6D00E2E446 /* cells */ = {
+			isa = PBXGroup;
+			children = (
+				9D9E20FB2A1160F800E2E446 /* PeopleCell.swift */,
+				9D9E20FC2A1160F800E2E446 /* PeopleCell.xib */,
+			);
+			path = cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
